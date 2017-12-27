@@ -1,0 +1,231 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://addons/godot-inheritance-dock/filter_menu.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_add.svg" type="Texture" id=2]
+[ext_resource path="res://addons/godot-inheritance-dock/color_controlled_texbutton.gd" type="Script" id=3]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_reload_small.svg" type="Texture" id=4]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_save.svg" type="Texture" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CanvasItemMaterial" id=3]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[node name="PopupPanel" type="PopupPanel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+margin_right = 500.0
+margin_bottom = -436.0
+rect_min_size = Vector2( 500, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+popup_exclusive = false
+script = ExtResource( 1 )
+_sections_unfolded = [ "Anchor", "Popup", "Rect", "Size Flags" ]
+
+[node name="PanelContainer" type="PanelContainer" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 317.0
+margin_bottom = 163.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+_sections_unfolded = [ "Anchor", "Margin", "Size Flags" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 497.0
+margin_bottom = 156.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 490.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 9
+alignment = 0
+_sections_unfolded = [ "custom_constants" ]
+
+[node name="AddFilterButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="0"]
+
+material = SubResource( 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 24.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 24, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+hint_tooltip = "Add a new filter to the end of the filter list.
+It may move due to Dictionary sorting (alphabetic by name)."
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 2 )
+texture_disabled = ExtResource( 2 )
+expand = true
+stretch_mode = 3
+script = ExtResource( 3 )
+_sections_unfolded = [ "Hint", "Margin", "Material", "Rect", "Size Flags", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+default_tex = null
+
+[node name="ReloadFiltersButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="1"]
+
+material = SubResource( 2 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 33.0
+margin_right = 33.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+hint_tooltip = "Reload the filter list from the config file."
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 4 )
+expand = true
+stretch_mode = 3
+script = ExtResource( 3 )
+_sections_unfolded = [ "Hint", "Material", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+default_tex = null
+
+[node name="SaveFiltersButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="2"]
+
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+material = SubResource( 3 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 42.0
+margin_right = 66.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 24, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+hint_tooltip = "Save the current filter list to the config file."
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 5 )
+texture_disabled = ExtResource( 5 )
+expand = true
+stretch_mode = 3
+script = ExtResource( 3 )
+_sections_unfolded = [ "Hint", "Margin", "Material", "Rect", "Size Flags", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+default_tex = null
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 75.0
+margin_right = 490.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Filter List"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "Size Flags", "custom_constants" ]
+
+[node name="FilterVbox" type="VBoxContainer" parent="PanelContainer/VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 490.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+
+

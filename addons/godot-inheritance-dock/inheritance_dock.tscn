@@ -1,0 +1,538 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://addons/godot-inheritance-dock/inheritance_dock.gd" type="Script" id=1]
+[ext_resource path="res://addons/godot-inheritance-dock/mode_button_group.tres" type="ButtonGroup" id=2]
+[ext_resource path="res://addons/godot-inheritance-dock/color_controlled_button.gd" type="Script" id=3]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_search.svg" type="Texture" id=4]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_script_create.svg" type="Texture" id=5]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_extend.svg" type="Texture" id=6]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_instance.svg" type="Texture" id=7]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_filesystem.svg" type="Texture" id=8]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_filter.svg" type="Texture" id=9]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CanvasItemMaterial" id=3]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[sub_resource type="CanvasItemMaterial" id=5]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[node name="PanelContainer" type="PanelContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 440.0
+margin_top = 207.0
+margin_right = 954.0
+margin_bottom = 405.0
+rect_min_size = Vector2( 0, 150 )
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 507.0
+margin_bottom = 191.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 0
+
+[node name="TypeContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 500.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+alignment = 0
+
+[node name="Scenes" type="ToolButton" parent="VBoxContainer/TypeContainer" index="0"]
+
+self_modulate = Color( 0.329412, 0.717647, 0.905882, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 158.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+pressed = true
+enabled_focus_mode = 2
+shortcut = null
+group = ExtResource( 2 )
+text = "Scenes"
+flat = true
+align = 1
+script = ExtResource( 3 )
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/TypeContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 162.0
+margin_right = 166.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Scripts" type="ToolButton" parent="VBoxContainer/TypeContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 170.0
+margin_right = 328.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = ExtResource( 2 )
+text = "Scripts"
+flat = true
+align = 1
+script = ExtResource( 3 )
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/TypeContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 332.0
+margin_right = 336.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Resources" type="ToolButton" parent="VBoxContainer/TypeContainer" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 340.0
+margin_right = 500.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = ExtResource( 2 )
+text = "Resources"
+flat = true
+align = 1
+script = ExtResource( 3 )
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
+[node name="SearchContainer" type="HBoxContainer" parent="VBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 26.0
+margin_right = 500.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/SearchContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 150.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 150, 0 )
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+focus_mode = 2
+placeholder_text = "filter scenes"
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+context_menu_enabled = true
+_sections_unfolded = [ "Placeholder", "Rect" ]
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SearchContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 154.0
+margin_right = 170.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+texture = ExtResource( 4 )
+stretch_mode = 4
+_sections_unfolded = [ "Anchor", "Size Flags" ]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 54.0
+margin_right = 500.0
+margin_bottom = 70.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Margin" ]
+
+[node name="ToolContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 76.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+hint_tooltip = "Adds the selected script to the Scene dock's selected node."
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Hint", "Margin" ]
+
+[node name="AddScriptButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="0"]
+
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+material = SubResource( 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 5 )
+texture_disabled = ExtResource( 5 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Margin", "Material", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
+[node name="ExtendButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="1"]
+
+material = SubResource( 2 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+hint_tooltip = "Extends this object with a new type that inherits the selected object."
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 6 )
+texture_disabled = ExtResource( 6 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Hint", "Margin", "Material", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
+[node name="InstanceButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="2"]
+
+material = SubResource( 3 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+hint_tooltip = "Instances this object under the Scene dock's selected node.
+Disabled for non-Node scripts and non-scene resources."
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 7 )
+texture_disabled = ExtResource( 7 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Hint", "Margin", "Material", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
+[node name="FindButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="3"]
+
+material = SubResource( 4 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 60.0
+margin_right = 76.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+hint_tooltip = "Reveal this resource in the FileSystem dock."
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 8 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Hint", "Margin", "Material", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 80.0
+margin_right = 84.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="FilterContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 88.0
+margin_right = 104.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Margin" ]
+
+[node name="FilterMenuButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/FilterContainer" index="0"]
+
+material = SubResource( 5 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 9 )
+texture_disabled = ExtResource( 9 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Margin", "Material", "Rect", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 74.0
+margin_right = 500.0
+margin_bottom = 184.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tab_align = 1
+tabs_visible = false
+_sections_unfolded = [ "Margin" ]
+
+[node name="Scenes" type="Tree" parent="VBoxContainer/TabContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Scripts" type="Tree" parent="VBoxContainer/TabContainer" index="1"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Resources" type="Tree" parent="VBoxContainer/TabContainer" index="2"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+

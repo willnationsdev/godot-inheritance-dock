@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/godot-inheritance-dock/samples/derived.tscn" type="PackedScene" id=1]
+
+[node name="base" instance=ExtResource( 1 )]
+
+derived = false
+
+[node name="Node" parent="Node12" index="0" instance_placeholder="res://addons/godot-inheritance-dock/samples/other_node.tscn"]
+
+
