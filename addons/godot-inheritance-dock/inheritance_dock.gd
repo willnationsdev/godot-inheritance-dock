@@ -61,6 +61,7 @@ onready var add_script_button = $VBoxContainer/HBoxContainer/ToolContainer/AddSc
 onready var extend_button = $VBoxContainer/HBoxContainer/ToolContainer/ExtendButton
 onready var instance_button = $VBoxContainer/HBoxContainer/ToolContainer/InstanceButton
 onready var find_button = $VBoxContainer/HBoxContainer/ToolContainer/FindButton
+onready var class_filter_edit = $VBoxContainer/HBoxContainer/FilterContainer/ClassFilterEdit
 onready var tab = $VBoxContainer/TabContainer
 
 # private
@@ -76,6 +77,7 @@ var _scene_filter_popup = null
 var _script_filter_popup = null
 var _resource_filter_popup = null
 var _search_filter = "" setget set_search_filter
+var _class_filter = "" setget set_class_filter
 var _ready_done = false
 
 ##### NOTIFICATIONS #####
@@ -100,6 +102,7 @@ func _ready():
 	instance_button.connect("pressed", self, "_on_instance_button_pressed")
 	find_button.connect("pressed", self, "_on_find_button_pressed")
 	filter_menu_button.connect("pressed", self, "_on_filter_menu_button_pressed")
+	class_filter_edit.connect("text_changed", self, "_on_class_filter_edit_text_changed")
 
 	# Filters Initialization
 	_scene_filter_popup = FilterMenuScene.instance()
@@ -206,18 +209,32 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 	while not file_list.empty():
 		file = file_list.back()
 		item = item_list.back()
+		var count = len(file["children"])
 
 		for a_filepath in file["children"]:
 			var child = file["children"][a_filepath]
 			var do_create = true
-
-			if _search_filter and a_filepath.find(_search_filter) == -1:
-				do_create = false
-			if filter_popup:
-				for a_regex in filter_popup.get_filters():
-					if not a_regex.search(a_filepath):
+			
+			if child["children"].empty():
+				if _search_filter and a_filepath.find(_search_filter) == -1:
+					do_create = false
+				if _class_filter:
+					var res = load(a_filepath)
+					var type = ""
+					if res is PackedScene:
+						var state = res.get_state()
+						type = state.get_node_type(0)
+					elif res is Script:
+						type = res.get_instance_base_type()
+					elif res is Resource:
+						type = res.get_class()
+					if type != _class_filter:
 						do_create = false
-						break
+				if filter_popup:
+					for a_regex in filter_popup.get_filters():
+						if not a_regex.search(a_filepath):
+							do_create = false
+							break
 
 			if do_create:
 				var new_item = p_tree.create_item(item)
@@ -244,7 +261,10 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 			
 				file_list.push_front(child)
 				item_list.push_front(new_item)
-	
+			count -= 1
+			if not count and item.get_parent() and not item.get_children():
+				item.get_parent().remove_child(item)
+			
 		if not file_list.empty():
 			file_list.pop_back()
 			item_list.pop_back()
@@ -262,6 +282,9 @@ func _on_resource_tab_button_pressed():
 
 func _on_search_text_changed(p_text):
 	set_search_filter(p_text)
+
+func _on_class_filter_edit_text_changed(p_text):
+	set_class_filter(p_text)
 
 func _on_new_file_button_pressed():
 	if resource_tree and resource_tree.get_selected():
@@ -368,4 +391,8 @@ func set_mode(p_mode):
 	
 func set_search_filter(p_value):
 	_search_filter = p_value
+	_build_tree_from_tree_dict(tree, tree_dict)
+
+func set_class_filter(p_value):
+	_class_filter = p_value
 	_build_tree_from_tree_dict(tree, tree_dict)
