@@ -1,1 +1,0 @@
-extends "damage_effect.gd"
