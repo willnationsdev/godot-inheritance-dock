@@ -5,11 +5,17 @@ Godot Engine does a terrific job of organizing built-in nodes and allowing you t
 With this plugin, you will be able to...
 
 - Quickly locate existing scenes, scripts, and resources with filenames that match custom regex filters.
-- Visually see scene relationships.
-- Instance scenes in the Inheritance dock.
-- Open new scenes that inherit from a scene in the Inheritance dock.
-- Change nodes to use or extend a script in the Inheritance dock.
-- Add children that use or extend a script in the Inheritance dock.
+- Visually see scene/script/resource relationships.
+- Open any scene/script/resource in the dock.
+- Instance scenes and nodes with scripts into the scene tree.
+- Extend new scenes and scripts from the dock.
+- Change nodes to use or extend a script in the dock.
+- Add children that use or extend a script in the dock.
+- Create and edit new resources easily from the dock.
+
+TODO:
+
+Add Undo/Redo capabilities.
 
 Credits:
 
