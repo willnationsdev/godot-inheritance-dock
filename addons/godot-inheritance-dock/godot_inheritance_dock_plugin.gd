@@ -149,6 +149,12 @@ func _on_extend_scene_request(p_scene_path):
 	scene_file_dialog.popup_centered_ratio()
 
 func _on_instance_scene_request(p_scene_path):
+	if get_editor_interface().get_edited_scene_root().get_filename() == p_scene_path:
+		var err_dialog = AcceptDialog.new()
+		get_editor_interface().get_base_control().add_child(err_dialog)
+		err_dialog.get_label().text = "You cannot instance a scene within itself!"
+		err_dialog.popup_centered_minsize()
+		return
 	var nodes = get_editor_interface().get_selection().get_selected_nodes()
 	var scene = load(p_scene_path)
 	if not scene:
