@@ -12,10 +12,17 @@ With this plugin, you will be able to...
 - Change nodes to use or extend a script in the dock.
 - Add children that use or extend a script in the dock.
 - Create and edit new resources easily from the dock.
+- NEW: Can now filter by in-engine class type (scenes are filtered based on the root node).
 
 TODO:
 
 Add Undo/Redo capabilities.
+
+KNOWN ISSUES:
+
+When new files are created (scenes, scripts resources) sometimes they won't show up in the FileSystem dock immediately. You can try to fix this by clicking out of the editor and having it regain focus in your operating system. Every now and then the FileSystem dock will reset itself, but it should pick up on the new file's existence pretty soon.
+
+The "folder" icon which locates things in the FileSystem dock may not be functional yet as it operates using code in a pending pull request (just FYI), so don't worry if it isn't working yet!
 
 Credits:
 
