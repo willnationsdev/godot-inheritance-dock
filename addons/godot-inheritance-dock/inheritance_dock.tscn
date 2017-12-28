@@ -1,14 +1,15 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://addons/godot-inheritance-dock/inheritance_dock.gd" type="Script" id=1]
 [ext_resource path="res://addons/godot-inheritance-dock/mode_button_group.tres" type="ButtonGroup" id=2]
 [ext_resource path="res://addons/godot-inheritance-dock/color_controlled_button.gd" type="Script" id=3]
 [ext_resource path="res://addons/godot-inheritance-dock/icons/icon_search.svg" type="Texture" id=4]
-[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_script_create.svg" type="Texture" id=5]
-[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_extend.svg" type="Texture" id=6]
-[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_instance.svg" type="Texture" id=7]
-[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_filesystem.svg" type="Texture" id=8]
-[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_filter.svg" type="Texture" id=9]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_new.svg" type="Texture" id=5]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_script_create.svg" type="Texture" id=6]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_extend.svg" type="Texture" id=7]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_instance.svg" type="Texture" id=8]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_filesystem.svg" type="Texture" id=9]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_filter.svg" type="Texture" id=10]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -220,12 +221,12 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 150.0
+margin_right = 480.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 150, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
-size_flags_horizontal = 1
+size_flags_horizontal = 3
 size_flags_vertical = 1
 focus_mode = 2
 placeholder_text = "filter scenes"
@@ -233,7 +234,7 @@ placeholder_alpha = 0.6
 caret_blink = false
 caret_blink_speed = 0.65
 context_menu_enabled = true
-_sections_unfolded = [ "Placeholder", "Rect" ]
+_sections_unfolded = [ "Placeholder", "Rect", "Size Flags" ]
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/SearchContainer" index="1"]
 
@@ -241,8 +242,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 154.0
-margin_right = 170.0
+margin_left = 484.0
+margin_right = 500.0
 margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 1
@@ -274,7 +275,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 76.0
+margin_right = 96.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 0 )
 hint_tooltip = "Adds the selected script to the Scene dock's selected node."
@@ -284,10 +285,9 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Hint", "Margin" ]
 
-[node name="AddScriptButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="0"]
+[node name="NewFileButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="0"]
 
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-material = SubResource( 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -308,16 +308,17 @@ texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 5 )
 texture_disabled = ExtResource( 5 )
 script = ExtResource( 3 )
-_sections_unfolded = [ "Margin", "Material", "Textures" ]
+_sections_unfolded = [ "Textures" ]
 hover_color = Color( 1, 1, 1, 0.7 )
 natural_color = Color( 1, 1, 1, 1 )
 pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
 disabled_color = Color( 0.5, 0.5, 0.5, 1 )
 use_material_pressed = false
 
-[node name="ExtendButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="1"]
+[node name="AddScriptButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="1"]
 
-material = SubResource( 2 )
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+material = SubResource( 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -326,10 +327,10 @@ margin_left = 20.0
 margin_right = 36.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 0 )
-hint_tooltip = "Extends this object with a new type that inherits the selected object."
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+disabled = true
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -339,16 +340,16 @@ texture_pressed = ExtResource( 6 )
 texture_hover = ExtResource( 6 )
 texture_disabled = ExtResource( 6 )
 script = ExtResource( 3 )
-_sections_unfolded = [ "Hint", "Margin", "Material", "Textures" ]
+_sections_unfolded = [ "Margin", "Material", "Textures" ]
 hover_color = Color( 1, 1, 1, 0.7 )
 natural_color = Color( 1, 1, 1, 1 )
 pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
 disabled_color = Color( 0.5, 0.5, 0.5, 1 )
 use_material_pressed = false
 
-[node name="InstanceButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="2"]
+[node name="ExtendButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="2"]
 
-material = SubResource( 3 )
+material = SubResource( 2 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -357,8 +358,7 @@ margin_left = 40.0
 margin_right = 56.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 0 )
-hint_tooltip = "Instances this object under the Scene dock's selected node.
-Disabled for non-Node scripts and non-scene resources."
+hint_tooltip = "Extends this object with a new type that inherits the selected object."
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
@@ -378,9 +378,9 @@ pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
 disabled_color = Color( 0.5, 0.5, 0.5, 1 )
 use_material_pressed = false
 
-[node name="FindButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="3"]
+[node name="InstanceButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="3"]
 
-material = SubResource( 4 )
+material = SubResource( 3 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -389,7 +389,8 @@ margin_left = 60.0
 margin_right = 76.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 0 )
-hint_tooltip = "Reveal this resource in the FileSystem dock."
+hint_tooltip = "Instances this object under the Scene dock's selected node.
+Disabled for non-Node scripts and non-scene resources."
 mouse_filter = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
@@ -409,14 +410,45 @@ pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
 disabled_color = Color( 0.5, 0.5, 0.5, 1 )
 use_material_pressed = false
 
+[node name="FindButton" type="TextureButton" parent="VBoxContainer/HBoxContainer/ToolContainer" index="4"]
+
+material = SubResource( 4 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 80.0
+margin_right = 96.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 0, 0 )
+hint_tooltip = "Reveal this resource in the FileSystem dock."
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 9 )
+texture_disabled = ExtResource( 9 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Hint", "Margin", "Material", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
 [node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 80.0
-margin_right = 84.0
+margin_left = 100.0
+margin_right = 104.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
@@ -429,8 +461,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 88.0
-margin_right = 104.0
+margin_left = 108.0
+margin_right = 124.0
 margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 1
@@ -456,10 +488,10 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 9 )
-texture_pressed = ExtResource( 9 )
-texture_hover = ExtResource( 9 )
-texture_disabled = ExtResource( 9 )
+texture_normal = ExtResource( 10 )
+texture_pressed = ExtResource( 10 )
+texture_hover = ExtResource( 10 )
+texture_disabled = ExtResource( 10 )
 script = ExtResource( 3 )
 _sections_unfolded = [ "Margin", "Material", "Rect", "Textures" ]
 hover_color = Color( 1, 1, 1, 0.7 )

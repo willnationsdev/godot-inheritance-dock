@@ -13,6 +13,7 @@ signal edit_script_request(p_script_path)
 signal extend_scene_request(p_scene_path)
 signal instance_scene_request(p_scene_path)
 signal edit_scene_request(p_scene_path)
+signal new_res_request(p_res_type, p_script_path)
 signal edit_res_request(p_res_path)
 signal file_selected(p_file)
 
@@ -55,6 +56,7 @@ onready var scene_tree = $VBoxContainer/TabContainer/Scenes
 onready var script_tree = $VBoxContainer/TabContainer/Scripts
 onready var resource_tree = $VBoxContainer/TabContainer/Resources
 onready var search_edit = $VBoxContainer/SearchContainer/LineEdit
+onready var new_file_button = $VBoxContainer/HBoxContainer/ToolContainer/NewFileButton
 onready var add_script_button = $VBoxContainer/HBoxContainer/ToolContainer/AddScriptButton
 onready var extend_button = $VBoxContainer/HBoxContainer/ToolContainer/ExtendButton
 onready var instance_button = $VBoxContainer/HBoxContainer/ToolContainer/InstanceButton
@@ -92,6 +94,7 @@ func _ready():
 	scene_tab_button.connect("pressed", self, "_on_scene_tab_button_pressed")
 	script_tab_button.connect("pressed", self, "_on_script_tab_button_pressed")
 	resource_tab_button.connect("pressed", self, "_on_resource_tab_button_pressed")
+	new_file_button.connect("pressed", self, "_on_new_file_button_pressed")
 	add_script_button.connect("pressed", self, "_on_add_script_button_pressed")
 	extend_button.connect("pressed", self, "_on_extend_button_pressed")
 	instance_button.connect("pressed", self, "_on_instance_button_pressed")
@@ -221,6 +224,7 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 				new_item.set_text(0, a_filepath.get_file())
 				new_item.set_tooltip(0, a_filepath)
 				new_item.set_metadata(0, a_filepath)
+				new_item.set_selectable(0, true)
 				new_item.set_editable(0, false)
 				match _mode:
 					RES_MODE:
@@ -235,10 +239,8 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 						else:
 							img = SCRIPT_ICON
 						new_item.set_icon(0, img)
-						new_item.set_selectable(0, ext != "")
 					SCENE_MODE, SCRIPT_MODE, _:
 						new_item.set_icon(0, ICONS[_mode])
-						new_item.set_selectable(0, true)
 			
 				file_list.push_front(child)
 				item_list.push_front(new_item)
@@ -260,6 +262,13 @@ func _on_resource_tab_button_pressed():
 
 func _on_search_text_changed(p_text):
 	set_search_filter(p_text)
+
+func _on_new_file_button_pressed():
+	if resource_tree and resource_tree.get_selected():
+		var path = resource_tree.get_selected().get_metadata(0)
+		var img = resource_tree.get_selected().get_icon(0)
+		if img == BASETYPE_ICON or img == SCRIPT_ICON: # not a resource file
+			emit_signal("new_res_request", resource_tree.get_selected().get_metadata(0))
 
 func _on_add_script_button_pressed():
 	if script_tree and script_tree.get_selected():
@@ -318,6 +327,8 @@ func set_mode(p_mode):
 		Mode.SCRIPT_MODE:
 			filter_popup = _script_filter_popup
 			_sort = Util.SORT_SCRIPT_INHERITANCE
+			new_file_button.disabled = true
+			new_file_button.self_modulate = new_file_button.disabled_color
 			add_script_button.disabled = false
 			add_script_button.self_modulate = add_script_button.natural_color
 			extend_button.disabled = false
@@ -329,6 +340,8 @@ func set_mode(p_mode):
 		Mode.RES_MODE:
 			filter_popup = _resource_filter_popup
 			_sort = Util.SORT_RES_INHERITANCE
+			new_file_button.disabled = false
+			new_file_button.self_modulate = new_file_button.natural_color
 			add_script_button.disabled = true
 			add_script_button.self_modulate = add_script_button.disabled_color
 			extend_button.disabled = true
@@ -340,6 +353,8 @@ func set_mode(p_mode):
 		Mode.SCENE_MODE, _:
 			filter_popup = _scene_filter_popup
 			_sort = Util.SORT_SCENE_INHERITANCE
+			new_file_button.disabled = true
+			new_file_button.self_modulate = new_file_button.disabled_color
 			add_script_button.disabled = true
 			add_script_button.self_modulate = add_script_button.disabled_color
 			extend_button.disabled = false

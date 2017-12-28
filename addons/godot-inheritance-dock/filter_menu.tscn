@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/godot-inheritance-dock/filter_menu.gd" type="Script" id=1]
 [ext_resource path="res://addons/godot-inheritance-dock/icons/icon_add.svg" type="Texture" id=2]
-[ext_resource path="res://addons/godot-inheritance-dock/color_controlled_texbutton.gd" type="Script" id=3]
+[ext_resource path="res://addons/godot-inheritance-dock/color_controlled_button.gd" type="Script" id=3]
 [ext_resource path="res://addons/godot-inheritance-dock/icons/icon_reload_small.svg" type="Texture" id=4]
 [ext_resource path="res://addons/godot-inheritance-dock/icons/icon_save.svg" type="Texture" id=5]
 
@@ -78,7 +78,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 490.0
-margin_bottom = 14.0
+margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 1
 size_flags_horizontal = 1
@@ -95,7 +95,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 24.0
-margin_bottom = 14.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 24, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 hint_tooltip = "Add a new filter to the end of the filter list.
@@ -120,7 +120,6 @@ natural_color = Color( 1, 1, 1, 1 )
 pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
 disabled_color = Color( 0.5, 0.5, 0.5, 1 )
 use_material_pressed = false
-default_tex = null
 
 [node name="ReloadFiltersButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="1"]
 
@@ -130,13 +129,13 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 33.0
-margin_right = 33.0
-margin_bottom = 14.0
+margin_right = 49.0
+margin_bottom = 16.0
 rect_pivot_offset = Vector2( 0, 0 )
 hint_tooltip = "Reload the filter list from the config file."
 mouse_filter = 0
 size_flags_horizontal = 1
-size_flags_vertical = 1
+size_flags_vertical = 3
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -145,16 +144,14 @@ texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 4 )
 texture_disabled = ExtResource( 4 )
-expand = true
-stretch_mode = 3
+stretch_mode = 4
 script = ExtResource( 3 )
-_sections_unfolded = [ "Hint", "Material", "Textures" ]
+_sections_unfolded = [ "Hint", "Material", "Size Flags", "Textures" ]
 hover_color = Color( 1, 1, 1, 0.7 )
 natural_color = Color( 1, 1, 1, 1 )
 pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
 disabled_color = Color( 0.5, 0.5, 0.5, 1 )
 use_material_pressed = false
-default_tex = null
 
 [node name="SaveFiltersButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="2"]
 
@@ -164,9 +161,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 42.0
-margin_right = 66.0
-margin_bottom = 14.0
+margin_left = 58.0
+margin_right = 82.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 24, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 hint_tooltip = "Save the current filter list to the config file."
@@ -191,7 +188,6 @@ natural_color = Color( 1, 1, 1, 1 )
 pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
 disabled_color = Color( 0.5, 0.5, 0.5, 1 )
 use_material_pressed = false
-default_tex = null
 
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" index="3"]
 
@@ -199,9 +195,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 75.0
+margin_left = 91.0
+margin_top = 1.0
 margin_right = 490.0
-margin_bottom = 14.0
+margin_bottom = 15.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -219,9 +216,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 18.0
+margin_top = 20.0
 margin_right = 490.0
-margin_bottom = 42.0
+margin_bottom = 44.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 1
 size_flags_horizontal = 1
