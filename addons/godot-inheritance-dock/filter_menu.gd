@@ -33,19 +33,11 @@ var _config = null setget set_config
 ##### NOTIFICATIONS #####
 
 func _ready():
-	#call_deferred("show")
-	set_filters({
-		"hi": {
-			"regex_text": "base\\.tscn",
-			"on": false
-		}
-	})
 	add_filter_button.connect("pressed", self, "_on_add_filter_button_pressed")
 	save_filters_button.connect("pressed", self, "_on_save_filters_button_pressed")
 	reload_filters_button.connect("pressed", self, "_on_reload_filters_button_pressed")
 	reload_filters_button.disabled = false
 	call_deferred("_set_save_disabled", true)
-	print(get_filters())
 
 ##### OVERRIDES #####
 
@@ -109,9 +101,8 @@ func _on_save_filters_button_pressed():
 	_set_save_disabled(true)
 
 func _on_reload_filters_button_pressed():
-	print("reload pressed")
 	if not _config:
-		print("no config")
+		print("WARNING: (res://addons/godot-inheritance-dock/filter_menu.gd::_on_reload_filters_button_pressed) Cannot reload filters! Reason: invalid config reference")
 		return
 	var new_filters = _config.get_value("filters", type+"_filters")
 	set_filters(new_filters)

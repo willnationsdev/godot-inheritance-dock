@@ -38,7 +38,7 @@ static func search_res(p_regex = ""):
 		regex = RegEx.new()
 		regex.compile(p_regex)
 		if not regex.is_valid():
-			print("regex failed to compile: ", p_regex)
+			print("WARNING: (res://addons/godot-inheritance-dock/res_utility.gd::search_res) regex failed to compile: ", p_regex)
 			return {}	
 
 	var dirs = ["res://"]
