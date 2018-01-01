@@ -124,18 +124,13 @@ func _on_extend_script_request(p_script_path):
 
 func _on_instance_script_request(p_script_path):
 	var nodes = get_editor_interface().get_selection().get_selected_nodes()
-	for a_node in nodes:
-		print("instancing on parent: ", a_node.get_name())
 	var script = load(p_script_path)
-	print("Script: ", script)
-	print("Base Type: ", script.get_instance_base_type())
 	if not script or not ClassDB.can_instance(script.get_instance_base_type()):
 		return
 	if not nodes.empty():
 		get_editor_interface().get_selection().clear()
 	for a_node in nodes:
 		var new_node = script.new()
-		print("New node: ", new_node)
 		a_node.add_child(new_node)
 		new_node.set_owner(get_editor_interface().get_edited_scene_root())
 		get_editor_interface().get_selection().add_node(new_node)
@@ -163,7 +158,6 @@ func _on_instance_scene_request(p_scene_path):
 		get_editor_interface().get_selection().clear()
 	for a_node in nodes:
 		var new_node = scene.instance()
-		print(new_node)
 		a_node.add_child(new_node)
 		new_node.set_owner(get_editor_interface().get_edited_scene_root())
 		get_editor_interface().get_selection().add_node(new_node)

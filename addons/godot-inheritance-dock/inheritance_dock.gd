@@ -132,7 +132,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.doubleclick and event.button_index == BUTTON_LEFT:
 			if not tree:
-				print("WARNING: (inheritance_dock.gd: 108) 'tree' is Nil!")
+				print("WARNING: (res://addons/godot-inheritance-dock/inheritance_dock.gd::_input) 'tree' is Nil!")
 				return
 			var item = tree.get_selected()
 			if item:
@@ -159,7 +159,7 @@ func _input(event):
 func _init_config():
 	var err = _config.load("res://addons/godot-inheritance-dock/godot_inheritance_dock.cfg")
 	if err != OK:
-		print("InheritanceDock-WARNING: godot_inheritance_dock.cfg failed to load!")
+		print("WARNING: (res://addons/godot-inheritance-dock/inheritance_dock.gd::_init_config) godot_inheritance_dock.cfg failed to load!")
 	_config_loaded = true
 	if _config.has_section_key("window", "rect_min_size"):
 		rect_min_size = _config.get_value("window", "rect_min_size")
@@ -313,23 +313,19 @@ func _on_file_selected(p_file):
 	emit_signal("file_selected", p_file)
 
 func _on_filter_menu_button_pressed():
-	print("filter_menu_button_pressed")
 	if not filter_popup:
 		return
-	print("popping up")
 	filter_popup.visible = !filter_popup.visible
 	if filter_popup.visible:
 		var x = Vector2(get_tree().get_root().size.x,0) / 2
 		var pos = filter_menu_button.get_global_position()
 		var side = 1 if pos > x else 0
-		print(side)
 		filter_popup.set_global_position(filter_menu_button.get_global_position()+Vector2(side * -300,20))
 
 func _update_filters(p_filters = []):
 	_build_tree_from_tree_dict(tree, tree_dict)
 
 func _scan_files():
-	print("Scanning files")
 	if scene_tree:
 		scene_tree.clear()
 	if script_tree:
