@@ -29,6 +29,7 @@ const SCRIPT_ICON = preload("icons/icon_script.svg")
 const RES_ICON = preload("icons/icon_resource.svg")
 const SCENE_ICON = preload("icons/icon_scene.svg")
 const BASETYPE_ICON = preload("icons/icon_basetype.svg")
+const FOLDER_ICON = preload("icons/icon_folder.svg")
 const ICONS = {
 	RES_MODE: RES_ICON,
 	SCRIPT_MODE: SCRIPT_ICON,
@@ -238,26 +239,35 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 
 			if do_create:
 				var new_item = p_tree.create_item(item)
-				new_item.set_text(0, a_filepath.get_file())
 				new_item.set_tooltip(0, a_filepath)
 				new_item.set_metadata(0, a_filepath)
 				new_item.set_selectable(0, true)
 				new_item.set_editable(0, false)
+				
+				var img = null
+				
+				if a_filepath.find("/", a_filepath.length()-1) != -1:
+					img = FOLDER_ICON
+					new_item.set_text(0, a_filepath)
+				else:
+					new_item.set_text(0, a_filepath.get_file())
+				
 				match _mode:
 					RES_MODE:
-						var ext = a_filepath.get_extension()
-						if a_filepath.find(".", 0) == -1:
-							ext = ""
-						var img = null
-						if not ext:
-							img = BASETYPE_ICON
-						elif ext.find("res", 0) != -1:
-							img = RES_ICON
-						else:
-							img = SCRIPT_ICON
-						new_item.set_icon(0, img)
+						if not img:
+							var ext = a_filepath.get_extension()
+							if a_filepath.find(".", 0) == -1:
+								ext = ""
+							if not ext:
+								img = BASETYPE_ICON
+							elif ext.find("res", 0) != -1:
+								img = RES_ICON
+							else:
+								img = SCRIPT_ICON
 					SCENE_MODE, SCRIPT_MODE, _:
-						new_item.set_icon(0, ICONS[_mode])
+						if not img:
+							img = ICONS[_mode]
+				new_item.set_icon(0, img)
 			
 				file_list.push_front(child)
 				item_list.push_front(new_item)

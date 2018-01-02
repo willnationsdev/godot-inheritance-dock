@@ -103,6 +103,8 @@ func _make_res_file():
 	get_editor_interface().edit_resource(script)
 	get_editor_interface().edit_resource(res)
 
+func _is_asset(p_path):
+	return p_path.find(".", 0) != -1 and p_path[p_path.length()-1] != "/"
 
 ##### CONNECTIONS #####
 
@@ -136,6 +138,8 @@ func _on_instance_script_request(p_script_path):
 		get_editor_interface().get_selection().add_node(new_node)
 
 func _on_edit_script_request(p_script_path):
+	if not _is_asset(p_script_path):
+		return
 	var script = load(p_script_path)
 	get_editor_interface().edit_resource(script)
 
@@ -163,6 +167,8 @@ func _on_instance_scene_request(p_scene_path):
 		get_editor_interface().get_selection().add_node(new_node)
 
 func _on_edit_scene_request(p_scene_path):
+	if not _is_asset(p_scene_path):
+		return
 	get_editor_interface().open_scene_from_path(p_scene_path)
 
 func _on_save_scene_pressed():
@@ -176,6 +182,8 @@ func _on_new_res_request(p_script_path):
 	res_file_dialog.popup_centered_ratio()
 
 func _on_edit_res_request(p_res_path):
+	if not _is_asset(p_res_path):
+		return
 	var res = load(p_res_path)
 	get_editor_interface().edit_resource(res)
 

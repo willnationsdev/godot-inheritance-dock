@@ -127,6 +127,13 @@ static func build_file_tree_dict(p_sort = SORT_SCENE_INHERITANCE):
 				while type != "Reference":
 					file_hierarchy.push_front(type)
 					type = ClassDB.get_parent_class(type)
+		
+		if file_path.find("res://addons/", 0) != -1:
+			var plugin_sub_path = file_path.replace("res://addons/", "")
+			var plugin_name = plugin_sub_path.substr(0, plugin_sub_path.find("/",0))
+			file_hierarchy.push_front("/"+plugin_name+"/")
+		else:
+			file_hierarchy.push_front("res://")
 
 		var file = r_root
 		for a_file_path in file_hierarchy:
@@ -139,7 +146,7 @@ static func build_file_tree_dict(p_sort = SORT_SCENE_INHERITANCE):
 				file = new_file
 			else:
 				file = inserted_map[a_file_path]
-				
+		
 	return r_root
 
 ##### PRIVATE METHODS #####
