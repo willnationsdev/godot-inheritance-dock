@@ -71,6 +71,10 @@ var _config_loaded = false
 var _scene_dict = null
 var _script_dict = null
 var _resource_dict = null
+var _scene_collapsed_set = {}
+var _script_collapsed_set = {}
+var _resource_collapsed_set = {}
+var _collapsed_set = null
 var _original_files = []
 var _sort = Util.SORT_SCENE_INHERITANCE
 var _mode = Mode.SCENE_MODE setget set_mode
@@ -104,6 +108,12 @@ func _ready():
 	find_button.connect("pressed", self, "_on_find_button_pressed")
 	filter_menu_button.connect("pressed", self, "_on_filter_menu_button_pressed")
 	class_filter_edit.connect("text_changed", self, "_on_class_filter_edit_text_changed")
+	scene_tree.connect("item_collapsed", self, "_on_item_collapsed")
+	script_tree.connect("item_collapsed", self, "_on_item_collapsed")
+	resource_tree.connect("item_collapsed", self, "_on_item_collapsed")
+	scene_tree.connect("item_activated", self, "_on_item_activated")
+	script_tree.connect("item_activated", self, "_on_item_activated")
+	resource_tree.connect("item_activated", self, "_on_item_activated")
 
 	# Filters Initialization
 	_scene_filter_popup = FilterMenuScene.instance()
@@ -128,26 +138,6 @@ func _ready():
 	set_mode(_mode)
 	
 	_ready_done = true
-
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.doubleclick and event.button_index == BUTTON_LEFT:
-			if not tree:
-				print("WARNING: (res://addons/godot-inheritance-dock/inheritance_dock.gd::_input) 'tree' is Nil!")
-				return
-			var item = tree.get_selected()
-			if item:
-				match _mode:
-					SCENE_MODE, SCRIPT_MODE:
-						emit_signal("edit_"+_mode_to_name()+"_request", item.get_metadata(0))
-					RES_MODE:
-						var meta = item.get_metadata(0)
-						var ext = meta.get_extension()
-						if ext:
-							var is_res = ext.find("res", 0) != -1
-							emit_signal("edit_"+ ("res" if is_res else "script") +"_request", meta)
-						elif meta.find(".", 0) == -1:
-							pass # TODO: It's an in-engine type. Open class API
 
 ##### OVERRIDES #####
 
@@ -197,9 +187,6 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 	p_tree.clear()
 	p_tree.set_hide_root(true)
 	p_tree.set_select_mode(Tree.SELECT_SINGLE)
-	#p_tree.set_columns(2)
-	#p_tree.set_column_min_width(0, 2)
-	#p_tree.set_column_min_width(1, 6)
 	var root = p_tree.create_item()
 
 	var file = p_tree_dict
@@ -243,6 +230,8 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 				new_item.set_metadata(0, a_filepath)
 				new_item.set_selectable(0, true)
 				new_item.set_editable(0, false)
+				if a_filepath in _collapsed_set:
+					new_item.set_collapsed(true)
 				
 				var img = null
 				
@@ -345,6 +334,30 @@ func _scan_files():
 	_init_files()
 	_original_files = files.duplicate()
 
+func _on_item_collapsed(p_item):
+	if not p_item.is_collapsed() and _collapsed_set.has(p_item.get_metadata(0)):
+		_collapsed_set.erase(p_item.get_metadata(0))
+	else:
+		_collapsed_set[p_item.get_metadata(0)] = null
+
+func _on_item_activated():
+	if not tree:
+		print("WARNING: (res://addons/godot-inheritance-dock/inheritance_dock.gd::_input) 'tree' is Nil!")
+		return
+	var item = tree.get_selected()
+	if item:
+		match _mode:
+			SCENE_MODE, SCRIPT_MODE:
+				emit_signal("edit_"+_mode_to_name()+"_request", item.get_metadata(0))
+			RES_MODE:
+				var meta = item.get_metadata(0)
+				var ext = meta.get_extension()
+				if ext:
+					var is_res = ext.find("res", 0) != -1
+					emit_signal("edit_"+ ("res" if is_res else "script") +"_request", meta)
+				elif meta.find(".", 0) == -1:
+					pass # TODO: It's an in-engine type. Open class API
+
 ##### SETTERS AND GETTERS #####
 
 func set_mode(p_mode):
@@ -366,6 +379,7 @@ func set_mode(p_mode):
 			instance_button.self_modulate = extend_button.natural_color
 			tree = script_tree
 			tree_dict = _script_dict
+			_collapsed_set = _script_collapsed_set
 		Mode.RES_MODE:
 			filter_popup = _resource_filter_popup
 			_sort = Util.SORT_RES_INHERITANCE
@@ -379,6 +393,7 @@ func set_mode(p_mode):
 			instance_button.self_modulate = extend_button.disabled_color
 			tree = resource_tree
 			tree_dict = _resource_dict
+			_collapsed_set = _resource_collapsed_set
 		Mode.SCENE_MODE, _:
 			filter_popup = _scene_filter_popup
 			_sort = Util.SORT_SCENE_INHERITANCE
@@ -392,6 +407,7 @@ func set_mode(p_mode):
 			instance_button.self_modulate = extend_button.natural_color
 			tree = scene_tree
 			tree_dict = _scene_dict
+			_collapsed_set = _scene_collapsed_set
 	search_edit.placeholder_text = "filter " + _mode_to_name() + "s"
 	_build_tree_from_tree_dict(tree, tree_dict)
 	
