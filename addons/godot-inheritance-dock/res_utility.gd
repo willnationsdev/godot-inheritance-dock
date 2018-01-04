@@ -134,18 +134,22 @@ static func build_file_tree_dict(p_sort = SORT_SCENE_INHERITANCE):
 			file_hierarchy.push_front("/"+plugin_name+"/")
 		else:
 			file_hierarchy.push_front("res://")
-
+		
+		var section = file_hierarchy.front()
+		if not inserted_map.has(section):
+			inserted_map[section] = {}
+		
 		var file = r_root
 		for a_file_path in file_hierarchy:
-			if not inserted_map.has(a_file_path):
+			if not inserted_map[section].has(a_file_path):
 				var new_file = {
 					"children": {}
 				}
-				inserted_map[a_file_path] = new_file
+				inserted_map[section][a_file_path] = new_file
 				file["children"][a_file_path] = new_file
 				file = new_file
 			else:
-				file = inserted_map[a_file_path]
+				file = inserted_map[section][a_file_path]
 		
 	return r_root
 
