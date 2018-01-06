@@ -7,8 +7,6 @@ extends EditorPlugin
 
 ##### CONSTANTS #####
 
-const InheritanceDock = preload("inheritance_dock.tscn")
-
 ##### EXPORTS #####
 
 ##### MEMBERS #####
@@ -28,9 +26,9 @@ var _res_script_path = "" # for use in assigning a script or type to generated .
 ##### NOTIFICATIONS #####
 
 func _enter_tree():
-	dock = InheritanceDock.instance()
+	dock = preload("inheritance_dock.tscn").instance()
 	dock.set_name(dock.TITLE)
-	add_control_to_dock(DOCK_SLOT_LEFT_UL, dock)
+	add_control_to_dock(DOCK_SLOT_RIGHT_UR, dock)
 	dock.connect("add_script_request", self, "_on_add_script_request")
 	dock.connect("extend_script_request", self, "_on_extend_script_request")
 	dock.connect("instance_script_request", self, "_on_instance_script_request")
@@ -52,8 +50,10 @@ func _enter_tree():
 	res_file_dialog.get_ok().connect("pressed", self, "_on_res_file_pressed")
 
 func _exit_tree():
+	scene_file_dialog.free()
+	res_file_dialog.free()
 	remove_control_from_docks(dock)
-	dock.queue_free()
+	dock.free()
 
 ##### OVERRIDES #####
 
