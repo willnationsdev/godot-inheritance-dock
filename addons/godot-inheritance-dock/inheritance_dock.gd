@@ -75,7 +75,6 @@ var _scene_collapsed_set = {}
 var _script_collapsed_set = {}
 var _resource_collapsed_set = {}
 var _collapsed_set = null
-var _original_files = []
 var _sort = Util.SORT_SCENE_INHERITANCE
 var _mode = Mode.SCENE_MODE setget set_mode
 var _scene_filter_popup = null
@@ -202,13 +201,20 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 		for a_filepath in file["children"]:
 			var child = file["children"][a_filepath]
 			var do_create = true
+
+			var link_data = a_filepath
+			var is_directory = a_filepath.find("/", a_filepath.length()-1) != -1
+			if is_directory:
+				link_data = ("" if a_filepath == "res://" else "res://addons")+a_filepath
 			
 			if child["children"].empty():
-				if _search_filter and a_filepath.find(_search_filter) == -1:
+				if _search_filter and link_data.find(_search_filter) == -1:
 					do_create = false
-				if _class_filter:
+
+				if _class_filter and not is_directory:
 					var res = load(a_filepath)
 					var type = ""
+
 					if res is PackedScene:
 						var state = res.get_state()
 						type = state.get_node_type(0)
@@ -216,18 +222,18 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 						type = res.get_instance_base_type()
 					elif res is Resource:
 						type = res.get_class()
+
 					if type != _class_filter:
 						do_create = false
+
 				if filter_popup:
 					for a_regex in filter_popup.get_filters():
-						if not a_regex.search(a_filepath):
+						if not a_regex.search(link_data):
 							do_create = false
 							break
 
 			if do_create:
 				var new_item = p_tree.create_item(item)
-				new_item.set_tooltip(0, a_filepath)
-				new_item.set_metadata(0, a_filepath)
 				new_item.set_selectable(0, true)
 				new_item.set_editable(0, false)
 				if a_filepath in _collapsed_set:
@@ -238,8 +244,12 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 				if a_filepath.find("/", a_filepath.length()-1) != -1:
 					img = FOLDER_ICON
 					new_item.set_text(0, a_filepath)
+					new_item.set_metadata(0, link_data)
+					new_item.set_tooltip(0, link_data)
 				else:
 					new_item.set_text(0, a_filepath.get_file())
+					new_item.set_metadata(0, a_filepath)
+					new_item.set_tooltip(0, a_filepath)
 				
 				match _mode:
 					RES_MODE:
@@ -332,7 +342,6 @@ func _scan_files():
 	if resource_tree:
 		resource_tree.clear()
 	_init_files()
-	_original_files = files.duplicate()
 
 func _on_item_collapsed(p_item):
 	if not p_item.is_collapsed() and _collapsed_set.has(p_item.get_metadata(0)):
