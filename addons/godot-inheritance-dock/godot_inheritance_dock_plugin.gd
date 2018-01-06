@@ -52,7 +52,7 @@ func _enter_tree():
 	res_file_dialog.get_ok().connect("pressed", self, "_on_res_file_pressed")
 
 func _exit_tree():
-	remove_control_docks(dock)
+	remove_control_from_docks(dock)
 	dock.queue_free()
 
 ##### OVERRIDES #####
