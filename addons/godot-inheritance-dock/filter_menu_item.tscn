@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/godot-inheritance-dock/filter_menu_item.gd" type="Script" id=1]
 [ext_resource path="res://addons/godot-inheritance-dock/icons/icon_error_sign.svg" type="Texture" id=2]
-[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_remove.svg" type="Texture" id=3]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/sync-arrows.svg" type="Texture" id=3]
+[ext_resource path="res://addons/godot-inheritance-dock/color_controlled_button.gd" type="Script" id=4]
+[ext_resource path="res://addons/godot-inheritance-dock/icons/icon_remove.svg" type="Texture" id=5]
 
 [node name="HBoxContainer" type="HBoxContainer" index="0"]
 
@@ -69,9 +71,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 180.0
-margin_right = 440.0
+margin_right = 420.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 260, 0 )
+rect_min_size = Vector2( 230, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 3
@@ -90,8 +92,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 443.0
-margin_right = 465.0
+margin_left = 423.0
+margin_right = 439.0
 margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
@@ -101,14 +103,44 @@ texture = ExtResource( 2 )
 stretch_mode = 6
 _sections_unfolded = [ "Margin" ]
 
-[node name="RemoveButton" type="ToolButton" parent="." index="4"]
+[node name="SyncButton" type="ToolButton" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 468.0
-margin_right = 496.0
+margin_left = 442.0
+margin_right = 470.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+hint_tooltip = "Synchronizes this filter item across all tabs.
+If a tab does not have it, one will be created."
+mouse_filter = 0
+size_flags_horizontal = 1
+size_flags_vertical = 3
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 3 )
+flat = true
+align = 1
+script = ExtResource( 4 )
+_sections_unfolded = [ "Hint", "Size Flags", "Textures" ]
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
+
+[node name="RemoveButton" type="ToolButton" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 473.0
+margin_right = 501.0
 margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
@@ -118,8 +150,14 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-icon = ExtResource( 3 )
+icon = ExtResource( 5 )
 flat = true
 align = 1
+script = ExtResource( 4 )
+hover_color = Color( 1, 1, 1, 0.7 )
+natural_color = Color( 1, 1, 1, 1 )
+pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
+disabled_color = Color( 0.5, 0.5, 0.5, 1 )
+use_material_pressed = false
 
 

@@ -6,6 +6,7 @@ extends PopupPanel
 ##### SIGNALS #####
 
 signal filters_updated
+signal item_sync_requested(p_popup, p_item)
 
 ##### CONSTANTS #####
 
@@ -45,6 +46,11 @@ func _ready():
 
 ##### PUBLIC METHODS #####
 
+func add_filter(p_name = "", p_regex_text = "", p_checked = false):
+	var item = FilterMenuItemScene.instance()
+	filter_vbox.add_child(item)
+	_setup_item(item, p_name, p_regex_text, p_checked)
+
 ##### PRIVATE METHODS #####
 
 # 1. on check pressed, emit "filters_updated"
@@ -56,6 +62,7 @@ func _setup_item(p_item, p_name = "", p_regex_text = "", p_checked = false):
 	p_item.connect("regex_updated", self, "_update_filters")
 	p_item.connect("name_updated", self, "_ui_dirtied")
 	p_item.connect("item_removed", self, "_ui_dirtied")
+	p_item.connect("item_sync_requested", self, "_on_item_sync_requested")
 	p_item.name_edit.text = p_name
 	p_item.regex_edit.text = p_regex_text
 	p_item.check.pressed = p_checked
@@ -90,7 +97,7 @@ func _set_save_disabled(p_disabled):
 func _on_add_filter_button_pressed():
 	var item = FilterMenuItemScene.instance()
 	filter_vbox.add_child(item)
-	_setup_item(item)
+	add_filter()
 	_update_filters()
 
 func _on_save_filters_button_pressed():
@@ -107,6 +114,9 @@ func _on_reload_filters_button_pressed():
 	var new_filters = _config.get_value("filters", type+"_filters")
 	set_filters(new_filters)
 	_set_save_disabled(true)
+
+func _on_item_sync_requested(p_item):
+	emit_signal("item_sync_requested", self, p_item)
 
 ##### SETTERS AND GETTERS #####
 
@@ -125,10 +135,7 @@ func set_filters(p_filters = {}):
 	for a_name in p_filters:
 		var regex_text = p_filters[a_name]["regex_text"]
 		var checked = p_filters[a_name]["on"]
-		var item = FilterMenuItemScene.instance(PackedScene.GEN_EDIT_STATE_INSTANCE)
-		filter_vbox.add_child(item)
-		_setup_item(item, a_name, regex_text, checked)
-		#call_deferred("_setup_item", item, a_name, regex_text)
+		add_filter(a_name, regex_text, checked)
 	_update_filters()
 
 func get_filters():

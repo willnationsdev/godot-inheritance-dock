@@ -80,6 +80,7 @@ var _mode = Mode.SCENE_MODE setget set_mode
 var _scene_filter_popup = null
 var _script_filter_popup = null
 var _resource_filter_popup = null
+var _filter_popups = []
 var _search_filter = "" setget set_search_filter
 var _class_filter = "" setget set_class_filter
 var _ready_done = false
@@ -119,19 +120,25 @@ func _ready():
 	add_child(_scene_filter_popup)
 	_scene_filter_popup.type = "scene"
 	_scene_filter_popup.connect("filters_updated", self, "_update_filters")
+	_scene_filter_popup.connect("item_sync_requested", self, "_on_item_sync_requested")
 	_scene_filter_popup.set_config(_config)
+	_filter_popups.append(_scene_filter_popup)
 	
 	_script_filter_popup = FilterMenuScene.instance()
 	add_child(_script_filter_popup)
 	_script_filter_popup.type = "script"
 	_script_filter_popup.connect("filters_updated", self, "_update_filters")
+	_script_filter_popup.connect("item_sync_requested", self, "_on_item_sync_requested")
 	_script_filter_popup.set_config(_config)
+	_filter_popups.append(_script_filter_popup)
 	
 	_resource_filter_popup = FilterMenuScene.instance()
 	add_child(_resource_filter_popup)
 	_resource_filter_popup.type = "resource"
 	_resource_filter_popup.connect("filters_updated", self, "_update_filters")
+	_resource_filter_popup.connect("item_sync_requested", self, "_on_item_sync_requested")
 	_resource_filter_popup.set_config(_config)
+	_filter_popups.append(_resource_filter_popup)
 	
 	# UI Initialization
 	set_mode(_mode)
@@ -331,7 +338,7 @@ func _on_filter_menu_button_pressed():
 		var side = 1 if pos > x else 0
 		filter_popup.set_global_position(filter_menu_button.get_global_position()+Vector2(side * -300,20))
 
-func _update_filters(p_filters = []):
+func _update_filters():
 	_build_tree_from_tree_dict(tree, tree_dict)
 
 func _scan_files():
@@ -366,6 +373,22 @@ func _on_item_activated():
 					emit_signal("edit_"+ ("res" if is_res else "script") +"_request", meta)
 				elif meta.find(".", 0) == -1:
 					pass # TODO: It's an in-engine type. Open class API
+
+func _on_item_sync_requested(p_popup, p_item):
+	var name = p_item.name_edit.text
+	var checked = p_item.check.pressed
+	var regex_text = p_item.regex_edit.text
+	for a_popup in _filter_popups:
+		if a_popup != p_popup:
+			var found = false
+			for an_item in a_popup.filter_vbox.get_children():
+				if an_item.name_edit.text == name:
+					an_item.regex_edit.text = regex_text
+					an_item.check.pressed = checked
+					found = true
+					break
+			if not found:
+				filter_popup.add_filter(name, regex_text, checked)
 
 ##### SETTERS AND GETTERS #####
 
