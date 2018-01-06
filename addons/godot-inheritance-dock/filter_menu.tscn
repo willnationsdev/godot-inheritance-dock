@@ -24,7 +24,7 @@ render_priority = 0
 blend_mode = 0
 light_mode = 0
 
-[node name="PopupPanel" type="PopupPanel"]
+[node name="PopupPanel" type="PopupPanel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -78,24 +78,24 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 303.0
-margin_bottom = 16.0
+margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 1
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_constants/separation = 9
+custom_constants/separation = 0
 alignment = 0
 _sections_unfolded = [ "custom_constants" ]
 
-[node name="AddFilterButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="0"]
+[node name="AddFilterButton" type="ToolButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="0"]
 
 material = SubResource( 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 24.0
-margin_bottom = 16.0
+margin_right = 28.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 hint_tooltip = "Add a new filter to the end of the filter list.
@@ -107,12 +107,9 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 2 )
-texture_hover = ExtResource( 2 )
-texture_disabled = ExtResource( 2 )
-expand = true
-stretch_mode = 3
+icon = ExtResource( 2 )
+flat = true
+align = 1
 script = ExtResource( 3 )
 _sections_unfolded = [ "Hint", "Margin", "Material", "Rect", "Size Flags", "Textures" ]
 hover_color = Color( 1, 1, 1, 0.7 )
@@ -121,16 +118,16 @@ pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
 disabled_color = Color( 0.5, 0.5, 0.5, 1 )
 use_material_pressed = false
 
-[node name="ReloadFiltersButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="1"]
+[node name="ReloadFiltersButton" type="ToolButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="1"]
 
 material = SubResource( 2 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 33.0
-margin_right = 49.0
-margin_bottom = 16.0
+margin_left = 28.0
+margin_right = 56.0
+margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 hint_tooltip = "Reload the filter list from the config file."
 mouse_filter = 0
@@ -140,11 +137,9 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 4 )
-texture_hover = ExtResource( 4 )
-texture_disabled = ExtResource( 4 )
-stretch_mode = 4
+icon = ExtResource( 4 )
+flat = true
+align = 1
 script = ExtResource( 3 )
 _sections_unfolded = [ "Hint", "Material", "Size Flags", "Textures" ]
 hover_color = Color( 1, 1, 1, 0.7 )
@@ -153,7 +148,7 @@ pressed_color = Color( 0.329412, 0.717647, 0.905882, 1 )
 disabled_color = Color( 0.5, 0.5, 0.5, 1 )
 use_material_pressed = false
 
-[node name="SaveFiltersButton" type="TextureButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="2"]
+[node name="SaveFiltersButton" type="ToolButton" parent="PanelContainer/VBoxContainer/HBoxContainer" index="2"]
 
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 material = SubResource( 3 )
@@ -161,9 +156,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 58.0
-margin_right = 82.0
-margin_bottom = 16.0
+margin_left = 56.0
+margin_right = 84.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 24, 0 )
 rect_pivot_offset = Vector2( 0, 0 )
 hint_tooltip = "Save the current filter list to the config file."
@@ -175,12 +170,9 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 5 )
-texture_hover = ExtResource( 5 )
-texture_disabled = ExtResource( 5 )
-expand = true
-stretch_mode = 3
+icon = ExtResource( 5 )
+flat = true
+align = 1
 script = ExtResource( 3 )
 _sections_unfolded = [ "Hint", "Margin", "Material", "Rect", "Size Flags", "Textures" ]
 hover_color = Color( 1, 1, 1, 0.7 )
@@ -195,10 +187,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 91.0
-margin_top = 1.0
+margin_left = 84.0
+margin_top = 5.0
 margin_right = 303.0
-margin_bottom = 15.0
+margin_bottom = 19.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -216,9 +208,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 20.0
+margin_top = 28.0
 margin_right = 303.0
-margin_bottom = 20.0
+margin_bottom = 28.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 1
 size_flags_horizontal = 1

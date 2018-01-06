@@ -336,7 +336,7 @@ func _on_filter_menu_button_pressed():
 		var x = Vector2(get_tree().get_root().size.x,0) / 2
 		var pos = filter_menu_button.get_global_position()
 		var side = 1 if pos > x else 0
-		filter_popup.set_global_position(filter_menu_button.get_global_position()+Vector2(side * -300,20))
+		filter_popup.set_global_position(filter_menu_button.get_global_position()+Vector2(side * -400,20))
 
 func _update_filters():
 	_build_tree_from_tree_dict(tree, tree_dict)
