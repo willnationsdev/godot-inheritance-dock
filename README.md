@@ -22,10 +22,10 @@ KNOWN ISSUES:
 
 When new files are created (scenes, scripts resources) sometimes they won't show up in the FileSystem dock immediately. You can try to fix this by clicking out of the editor and having it regain focus in your operating system. Every now and then the FileSystem dock will reset itself, but it should pick up on the new file's existence pretty soon.
 
-The "folder" icon which locates things in the FileSystem dock may not be functional yet as it operates using code in a pending pull request (just FYI), so don't worry if it isn't working yet!
-
 When activating the plugin or opening a project with the plugin for the first time, it will need to "re-import assets" for the icons. This will cause the scripts to not load properly the first time. Re-open the project a second time, and it should be fine.
+
+Currently, the plugin has some slight memory leaks I've been trying to track down. 
 
 Credits:
 
-"Folder" icon made or derived from the works of [SmashIcons](https://www.flaticon.com/authors/smashicons) from [www.flaticon.com](https://www.flaticon.com/). Licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
+"Folder" and "Sync-Arrows" icons made or derived from the works of [SmashIcons](https://www.flaticon.com/authors/smashicons) and [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/). Licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
