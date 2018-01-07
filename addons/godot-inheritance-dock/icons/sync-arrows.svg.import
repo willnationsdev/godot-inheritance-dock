@@ -7,7 +7,7 @@ path="res://.import/sync-arrows.svg-147cc2d6628e7f5469fe7c5a8cf2e2fb.stex"
 [deps]
 
 source_file="res://addons/godot-inheritance-dock/icons/sync-arrows.svg"
-source_md5="eb95ec0d5e7ddaba35b24faf79ed420d"
+source_md5="e4b210bf867e0cbc79ac931fc4a2601d"
 
 dest_files=[ "res://.import/sync-arrows.svg-147cc2d6628e7f5469fe7c5a8cf2e2fb.stex" ]
 dest_md5="9e21c92c6b8c6ef52583c0f86ef4fcc5"

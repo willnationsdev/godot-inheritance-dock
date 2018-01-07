@@ -29,6 +29,7 @@ func _enter_tree():
 	dock = preload("inheritance_dock.tscn").instance()
 	dock.set_name(dock.TITLE)
 	add_control_to_dock(DOCK_SLOT_RIGHT_UR, dock)
+
 	dock.connect("add_script_request", self, "_on_add_script_request")
 	dock.connect("extend_script_request", self, "_on_extend_script_request")
 	dock.connect("instance_script_request", self, "_on_instance_script_request")
@@ -39,7 +40,9 @@ func _enter_tree():
 	dock.connect("new_res_request", self, "_on_new_res_request")
 	dock.connect("edit_res_request", self, "_on_edit_res_request")
 	dock.connect("file_selected", self, "_on_file_selected")
+
 	get_editor_interface().get_resource_filesystem().connect("filesystem_changed", dock, "_scan_files")
+
 	get_editor_interface().get_base_control().add_child(scene_file_dialog)
 	scene_file_dialog.add_filter("*.tscn,*.scn; Scenes")
 	scene_file_dialog.mode = FileDialog.MODE_SAVE_FILE

@@ -20,6 +20,7 @@ signal file_selected(p_file)
 ##### CONSTANTS #####
 
 enum Mode { SCENE_MODE=0, SCRIPT_MODE=1, RES_MODE=2 }
+enum Caches { CACHE_NONE=0, CACHE_SCENE=1, CACHE_SCRIPT=2, CACHE_RES=4 }
 
 const Util = preload("res_utility.gd")
 const FilterMenuScene = preload("filter_menu.tscn")
@@ -30,10 +31,16 @@ const RES_ICON = preload("icons/icon_resource.svg")
 const SCENE_ICON = preload("icons/icon_scene.svg")
 const BASETYPE_ICON = preload("icons/icon_basetype.svg")
 const FOLDER_ICON = preload("icons/icon_folder.svg")
+
 const ICONS = {
 	RES_MODE: RES_ICON,
 	SCRIPT_MODE: SCRIPT_ICON,
 	SCENE_MODE: SCENE_ICON
+}
+const CACHE_MAP = {
+	RES_MODE: CACHE_RES,
+	SCENE_MODE: CACHE_SCENE,
+	SCRIPT_MODE: CACHE_SCRIPT
 }
 
 ##### EXPORTS #####
@@ -84,6 +91,7 @@ var _filter_popups = []
 var _search_filter = "" setget set_search_filter
 var _class_filter = "" setget set_class_filter
 var _ready_done = false
+var _cache_flags = Caches.CACHE_NONE
 
 ##### NOTIFICATIONS #####
 
@@ -165,11 +173,9 @@ func _init_config():
 
 func _init_files():
 	_scene_dict = Util.build_file_tree_dict(Util.SORT_SCENE_INHERITANCE)
-	_build_tree_from_tree_dict(scene_tree, _scene_dict)
 	_script_dict = Util.build_file_tree_dict(Util.SORT_SCRIPT_INHERITANCE)
-	_build_tree_from_tree_dict(script_tree, _script_dict)
 	_resource_dict = Util.build_file_tree_dict(Util.SORT_RES_INHERITANCE)
-	_build_tree_from_tree_dict(resource_tree, _resource_dict)
+	_cache_flags = Caches.CACHE_NONE
 	match _mode:
 		Mode.SCRIPT_MODE:
 			tree = script_tree
@@ -180,6 +186,8 @@ func _init_files():
 		Mode.SCENE_MODE, _:
 			tree = scene_tree
 			tree_dict = _scene_dict
+	_cache_flags |= CACHE_MAP[_mode]
+	_build_tree_from_tree_dict(tree, tree_dict)
 
 func _mode_to_name():
 	match _mode:
@@ -441,7 +449,9 @@ func set_mode(p_mode):
 			tree_dict = _scene_dict
 			_collapsed_set = _scene_collapsed_set
 	search_edit.placeholder_text = "filter " + _mode_to_name() + "s"
-	_build_tree_from_tree_dict(tree, tree_dict)
+	if not (_cache_flags & CACHE_MAP[_mode]):
+		_build_tree_from_tree_dict(tree, tree_dict)
+		_cache_flags |= CACHE_MAP[_mode]
 	
 func set_search_filter(p_value):
 	_search_filter = p_value
