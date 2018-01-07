@@ -22,6 +22,7 @@ var res_file_dialog = EditorFileDialog.new()
 # private
 var _scene_path = "" # for use in extending scenes
 var _res_script_path = "" # for use in assigning a script or type to generated .(t)res files
+var _undo_redo = null
 
 ##### NOTIFICATIONS #####
 
@@ -51,6 +52,8 @@ func _enter_tree():
 	res_file_dialog.add_filter("*.tres,*.res; Resources")
 	res_file_dialog.mode = FileDialog.MODE_SAVE_FILE
 	res_file_dialog.get_ok().connect("pressed", self, "_on_res_file_pressed")
+	
+	_undo_redo = get_undo_redo()
 
 func _exit_tree():
 	scene_file_dialog.free()
@@ -116,8 +119,12 @@ func _on_add_script_request(p_script_path):
 	var script = load(p_script_path)
 	if not script or not ClassDB.can_instance(script.get_instance_base_type()):
 		return
+	_undo_redo.create_action("Add Script To Selected Nodes", UndoRedo.MERGE_ALL)
 	for a_node in nodes:
-		a_node.set_script(script)
+		var a_script = a_node.get_script()
+		_undo_redo.add_do_method(a_node, "set_script", script)
+		_undo_redo.add_undo_method(a_node, "set_script", a_script)
+	_undo_redo.commit_action()
 
 func _on_extend_script_request(p_script_path):
 	var script = load(p_script_path)
@@ -132,13 +139,20 @@ func _on_instance_script_request(p_script_path):
 	var script = load(p_script_path)
 	if not script or not ClassDB.can_instance(script.get_instance_base_type()):
 		return
+	
+	_undo_redo.create_action("Instance Script Under Selected Nodes", UndoRedo.MERGE_ALL)
 	if not nodes.empty():
-		get_editor_interface().get_selection().clear()
+		for a_selected_node in get_editor_interface().get_selection().get_selected_nodes():
+			_undo_redo.add_undo_method(get_editor_interface().get_selection(), "add_node", a_selected_node)
+		_undo_redo.add_do_method(get_editor_interface().get_selection(), "clear")
+	
 	for a_node in nodes:
 		var new_node = script.new()
-		a_node.add_child(new_node)
-		new_node.set_owner(get_editor_interface().get_edited_scene_root())
-		get_editor_interface().get_selection().add_node(new_node)
+		_undo_redo.add_do_method(a_node, "add_child", new_node)
+		_undo_redo.add_do_method(new_node, "set_owner", get_editor_interface().get_edited_scene_root())
+		_undo_redo.add_do_method(get_editor_interface().get_selection(), "add_node", new_node)
+		_undo_redo.add_undo_method(new_node, "queue_free")
+	_undo_redo.commit_action()
 
 func _on_edit_script_request(p_script_path):
 	if not _is_asset(p_script_path):
@@ -161,13 +175,20 @@ func _on_instance_scene_request(p_scene_path):
 	var scene = load(p_scene_path)
 	if not scene:
 		return
+	
+	_undo_redo.create_action("Instance Scene Under Selected Nodes", UndoRedo.MERGE_ALL)
 	if not nodes.empty():
-		get_editor_interface().get_selection().clear()
+		for a_selected_node in get_editor_interface().get_selection().get_selected_nodes():
+			_undo_redo.add_undo_method(get_editor_interface().get_selection(), "add_node", a_selected_node)
+		_undo_redo.add_do_method(get_editor_interface().get_selection(), "clear")
+	
 	for a_node in nodes:
 		var new_node = scene.instance()
-		a_node.add_child(new_node)
-		new_node.set_owner(get_editor_interface().get_edited_scene_root())
-		get_editor_interface().get_selection().add_node(new_node)
+		_undo_redo.add_do_method(a_node, "add_child", new_node)
+		_undo_redo.add_do_method(new_node, "set_owner", get_editor_interface().get_edited_scene_root())
+		_undo_redo.add_do_method(get_editor_interface().get_selection(), "add_node", new_node)
+		_undo_redo.add_undo_method(new_node, "queue_free")
+	_undo_redo.commit_action()
 
 func _on_edit_scene_request(p_scene_path):
 	if not _is_asset(p_scene_path):

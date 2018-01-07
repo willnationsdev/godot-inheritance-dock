@@ -366,7 +366,7 @@ func _on_item_collapsed(p_item):
 
 func _on_item_activated():
 	if not tree:
-		print("WARNING: (res://addons/godot-inheritance-dock/inheritance_dock.gd::_input) 'tree' is Nil!")
+		print("WARNING: (res://addons/godot-inheritance-dock/inheritance_dock.gd::_on_item_activated) 'tree' is Nil!")
 		return
 	var item = tree.get_selected()
 	if item:
