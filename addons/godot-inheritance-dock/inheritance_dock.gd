@@ -383,20 +383,20 @@ func _on_item_activated():
 					pass # TODO: It's an in-engine type. Open class API
 
 func _on_item_sync_requested(p_popup, p_item):
-	var name = p_item.name_edit.text
+	var filter_name = p_item.name_edit.text
 	var checked = p_item.check.pressed
 	var regex_text = p_item.regex_edit.text
 	for a_popup in _filter_popups:
 		if a_popup != p_popup:
 			var found = false
 			for an_item in a_popup.filter_vbox.get_children():
-				if an_item.name_edit.text == name:
+				if an_item.name_edit.text == filter_name:
 					an_item.regex_edit.text = regex_text
 					an_item.check.pressed = checked
 					found = true
 					break
 			if not found:
-				filter_popup.add_filter(name, regex_text, checked)
+				filter_popup.add_filter(filter_name, regex_text, checked)
 
 ##### SETTERS AND GETTERS #####
 
