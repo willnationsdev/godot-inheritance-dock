@@ -3,20 +3,21 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/sync-arrows.svg-147cc2d6628e7f5469fe7c5a8cf2e2fb.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://addons/godot-inheritance-dock/icons/sync-arrows.svg"
-source_md5="e4b210bf867e0cbc79ac931fc4a2601d"
-
 dest_files=[ "res://.import/sync-arrows.svg-147cc2d6628e7f5469fe7c5a8cf2e2fb.stex" ]
-dest_md5="9e21c92c6b8c6ef52583c0f86ef4fcc5"
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
@@ -26,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true

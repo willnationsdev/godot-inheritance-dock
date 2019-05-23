@@ -32,15 +32,15 @@ const SCENE_ICON = preload("icons/icon_scene.svg")
 const BASETYPE_ICON = preload("icons/icon_basetype.svg")
 const FOLDER_ICON = preload("icons/icon_folder.svg")
 
-const ICONS = {
-	RES_MODE: RES_ICON,
-	SCRIPT_MODE: SCRIPT_ICON,
-	SCENE_MODE: SCENE_ICON
+var ICONS = {
+	Mode.RES_MODE: RES_ICON,
+	Mode.SCRIPT_MODE: SCRIPT_ICON,
+	Mode.SCENE_MODE: SCENE_ICON
 }
-const CACHE_MAP = {
-	RES_MODE: CACHE_RES,
-	SCENE_MODE: CACHE_SCENE,
-	SCRIPT_MODE: CACHE_SCRIPT
+var CACHE_MAP = {
+	Mode.RES_MODE: Caches.CACHE_RES,
+	Mode.SCENE_MODE: Caches.CACHE_SCENE,
+	Mode.SCRIPT_MODE: Caches.CACHE_SCRIPT
 }
 
 ##### EXPORTS #####
@@ -267,7 +267,7 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 					new_item.set_tooltip(0, a_filepath)
 				
 				match _mode:
-					RES_MODE:
+					Mode.RES_MODE:
 						if not img:
 							var ext = a_filepath.get_extension()
 							if a_filepath.find(".", 0) == -1:
@@ -278,7 +278,7 @@ func _build_tree_from_tree_dict(p_tree, p_tree_dict):
 								img = RES_ICON
 							else:
 								img = SCRIPT_ICON
-					SCENE_MODE, SCRIPT_MODE, _:
+					Mode.SCENE_MODE, Mode.SCRIPT_MODE, _:
 						if not img:
 							img = ICONS[_mode]
 				new_item.set_icon(0, img)
@@ -371,9 +371,9 @@ func _on_item_activated():
 	var item = tree.get_selected()
 	if item:
 		match _mode:
-			SCENE_MODE, SCRIPT_MODE:
+			Mode.SCENE_MODE, Mode.SCRIPT_MODE:
 				emit_signal("edit_"+_mode_to_name()+"_request", item.get_metadata(0))
-			RES_MODE:
+			Mode.RES_MODE:
 				var meta = item.get_metadata(0)
 				var ext = meta.get_extension()
 				if ext:
