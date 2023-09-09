@@ -8,7 +8,7 @@ extends Reference
 
 ##### CONSTANTS #####
 
-const REGEX_EXT_SCRIPT = "\\.gd|\\.vs|\\.cs|\\.gdns"
+const REGEX_EXT_SCRIPT = "\\.gd|\\.vs|\\.cs(?!v)|\\.gdns"
 const REGEX_EXT_SCENE = "\\.t?scn"
 const REGEX_EXT_RES = "\\.t?res"
 
