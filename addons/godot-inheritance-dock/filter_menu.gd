@@ -95,8 +95,6 @@ func _set_save_disabled(p_disabled):
 ##### CONNECTIONS #####
 
 func _on_add_filter_button_pressed():
-	var item = FilterMenuItemScene.instance()
-	filter_vbox.add_child(item)
 	add_filter()
 	_update_filters()
 
