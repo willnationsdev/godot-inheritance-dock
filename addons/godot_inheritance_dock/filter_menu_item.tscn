@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://d1ncuj18y3ecg"]
+
+[ext_resource type="Script" path="res://addons/godot_inheritance_dock/filter_menu_item.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://yu4djux2mk78" path="res://addons/godot_inheritance_dock/icons/icon_error_sign.svg" id="2"]
+[ext_resource type="Texture2D" uid="uid://bpofja7lwdrkb" path="res://addons/godot_inheritance_dock/icons/sync-arrows.svg" id="3"]
+[ext_resource type="Script" path="res://addons/godot_inheritance_dock/color_controlled_button.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://bv3xutik8x5sh" path="res://addons/godot_inheritance_dock/icons/icon_remove.svg" id="5"]
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 131.0
+offset_bottom = 20.0
+theme_override_constants/separation = 3
+script = ExtResource("1")
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 2
+
+[node name="NameEdit" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+placeholder_text = "Name"
+
+[node name="RegExEdit" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "RegEx Filepath"
+
+[node name="RegExValid" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 0
+texture = ExtResource("2")
+stretch_mode = 5
+
+[node name="SyncButton" type="Button" parent="."]
+self_modulate = Color(0.329412, 0.717647, 0.905882, 1)
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Synchronizes this filter item across all tabs.
+If a tab does not have it, one will be created."
+icon = ExtResource("3")
+flat = true
+script = ExtResource("4")
+pressed_color = Color(0.329412, 0.717647, 0.905882, 1)
+use_material_pressed = false
+
+[node name="RemoveButton" type="Button" parent="."]
+self_modulate = Color(0.329412, 0.717647, 0.905882, 1)
+layout_mode = 2
+icon = ExtResource("5")
+flat = true
+script = ExtResource("4")
+pressed_color = Color(0.329412, 0.717647, 0.905882, 1)
+use_material_pressed = false
