@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bet6owwoih8up"]
+
+[ext_resource type="Script" path="res://addons/godot_inheritance_dock/color_controlled_button.gd" id="1"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+blend_mode = 4
+
+[node name="TextureButton" type="TextureButton"]
+material = SubResource("1")
+offset_top = 3.0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1")
+pressed_color = Color(0.329412, 0.717647, 0.905882, 1)

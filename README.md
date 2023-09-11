@@ -24,7 +24,7 @@ When new files are created (scenes, scripts resources) sometimes they won't show
 
 When activating the plugin or opening a project with the plugin for the first time, it will need to "re-import assets" for the icons. This will cause the scripts to not load properly the first time. Re-open the project a second time, and it should be fine.
 
-Currently, the plugin has some slight memory leaks I've been trying to track down. 
+Currently, the plugin has some slight memory leaks I've been trying to track down.
 
 Credits:
 
